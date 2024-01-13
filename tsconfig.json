@@ -1,0 +1,14 @@
+{
+  "extends": "astro/tsconfigs/base",
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "paths": {
+      "@functions/*": ["src/functions/*"],
+      "@modules/*": ["src/modules/*"],
+      "@common/*": ["src/modules/common/*"],
+      "@auth/*": ["src/modules/auth/*"],
+      "@home/*": ["src/modules/home/*"],
+    }
+  },  
+}

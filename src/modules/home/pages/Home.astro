@@ -1,0 +1,101 @@
+---
+import { SessionManager } from "@functions/session";
+import MainLayout from "@common/layouts/MainLayout.astro";
+
+const session = new SessionManager(Astro);
+
+const sessionData = session.getData();
+
+session.save(sessionData);
+---
+
+<MainLayout>
+  {
+    !sessionData.userId ? (
+      <div class="pt-20 flex flex-col items-center">
+        <h1 class="text-2xl font-bold text-lime-500">Welcome Guest</h1>
+        <p class="text-gray-500 ml-2">
+          You are not logged in. Please login to see the protected page.
+        </p>
+        <a href="/login" class="mt-4 text-lime-500 hover:underline">
+          Login
+        </a>
+      </div>
+    ) : (
+      <div class="container mx-auto px-4">
+        <div class="pt-20 flex flex-col items-center">
+          <h1 class="text-2xl font-bold text-lime-500">
+            Welcome {sessionData.userId}
+          </h1>
+          <p class="text-gray-500 ml-2">
+            This is a protected page. You can only see this if you are logged
+            in.
+          </p>
+          <a href="/logout" class="mt-4 text-lime-500 hover:underline">
+            Logout
+          </a>
+        </div>
+        <div class="mt-8">
+          <h2 class="text-xl font-bold text-lime-500">Steps:</h2>
+
+          <ol class="list-disc">
+            <li>Session: Astro Cookies are stored in the browser.</li>
+            <li>Session: Save the session data in a server-side file. </li>
+            <li>Auth: Make a login page and a logout page.</li>
+          </ol>
+        </div>
+        <div class="mt-8">
+          <h2 class="text-xl font-bold text-lime-500">Session:</h2>
+          <p class="text-gray-600 underline">
+            Astro Cookies are stored in the browser.
+          </p>
+          <p>The official docs for Astro Cookies: </p>
+          <ol class="list-disc">
+            <li>
+              <a
+                href="https://docs.astro.build/core-concepts/cookies"
+                target="_blank"
+                class="text-lime-500 hover:underline"
+              >
+                Astro Cookies (API)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://docs.astro.build/es/guides/server-side-rendering/#cookies"
+                target="_blank"
+                class="text-lime-500 hover:underline"
+              >
+                Astro Cookies (SSR)
+              </a>
+            </li>
+          </ol>
+
+          <br />
+          <p class="text-gray-600 underline">
+            Save the session data in a server-side file.
+          </p>
+          <p class="text-gray-600">
+            In the project folder we have a folder called <code>functions</code>
+            <br />
+            In there we have a file called <code>session.js</code> which
+            contains the SessionManager class. All the session logic is in
+            there. <br />
+            <br />
+            <code>getID</code> - returns the session ID for the current cookie{" "}
+            <br />
+            <code>reset</code> - resets the session data from the session file
+            in the <code>sessions</code> folder <br />
+            <code>getData</code> - returns the session data from the session
+            file in the <code>sessions</code> folder <br />
+            <code>save</code> - saves the session data to the session file in
+            the <code>sessions</code> folder <br />
+            <code>existsSessionFile</code> - checks if the session file exists
+            in the <code>sessions</code> folder <br />
+            <br />
+          </p>
+        </div>
+      </div>
+    )
+  }
+</MainLayout>

@@ -1,0 +1,33 @@
+---
+import MainLayout from "@common/layouts/MainLayout.astro";
+import { AuthController } from "@auth/handlers/AuthController";
+import LoginCard from "@auth/components/LoginCard.astro";
+const auth = new AuthController(Astro);
+
+// Controller
+const data = await auth.login();
+---
+
+<MainLayout>
+  {
+    !data.userId ? (
+      <>
+        <div class="flex justify-center pt-4">
+          <p class="italic">
+            Test user credentials: <br />
+            username: <b>admin</b> <br />
+            password: <b>admin</b>
+          </p>
+        </div>
+        <LoginCard />
+      </>
+    ) : (
+      <div>
+        <script>
+          history.replaceState({}, "", "/"); // redirect to home page
+          window.location.href = "/";
+        </script>
+      </div>
+    )
+  }
+</MainLayout>
