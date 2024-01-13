@@ -1,14 +1,6 @@
-# Astro Starter Kit: Minimal
+# Astro Auth Login
 
-```sh
-npm create astro@latest -- --template minimal
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This is a simple example of how to use Astro Auth to create a login page.
 
 ## 🚀 Project Structure
 
@@ -18,16 +10,72 @@ Inside of your Astro project, you'll see the following folders and files:
 /
 ├── public/
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   └── functions/
+│       └── session.ts
+│   └── modules/
+│       └── auth/
+│           ├── pages/
+│           │   ├── Login.astro
+│           │   └── Logout.astro
+│           ├── components/
+│           │   └── LoginCard.astro
+│           ├── handlers/
+│           │   └── AuthController.ts
+|       └── common/
+│           └── components/
+│               ├── Header.astro
+│               ├── Button.astro
+│               └── Input.astro
+│           └── layouts/
+│               └── MainLayout.astro
+│       └── home/
+│           └── pages/
+│               └── Home.astro
+│   └── session/
+
+
+## 🧙‍♂️ Getting Started
+
+### 1. Clone this repository
+
+```bash
+git clone https://github.com/netoya/astro-auth-login.git
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### 2. Install dependencies
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm install
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+### 3. Start the dev server
+
+```bash
+npm run dev
+```
+
+### 4. Open the project
+
+Your site is now running at `http://localhost:4321`!
+
+## 📝 Reading the code
+
+This project is a simple example of how to use Astro Auth to create a login page.
+
+Sessions are stored in a cookie using [astro-cookie](https://docs.astro.build/core-concepts/cookies)
+
+Session data is stored in the sessions folder.
+
+The SessionManager class is used to manage sessions.
+
+The methods are:
+
+- getID - returns the session ID for the current cookie
+- reset - resets the session data from the session file in the sessions folder
+- getData - returns the session data from the session file in the sessions folder
+- save - saves the session data to the session file in the sessions folder
+- existsSessionFile - checks if the session file exists in the sessions folder
+
 
 ## 🧞 Commands
 
