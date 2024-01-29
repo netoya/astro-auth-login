@@ -1,17 +1,17 @@
 ---
-import { SessionManager } from "@functions/session";
+import { SessionStrapiManager } from "@functions/session-strapi";
 import MainLayout from "@common/layouts/MainLayout.astro";
 
-const session = new SessionManager(Astro);
+// @ts-ignore
+const session = Astro.locals.session as SessionStrapiManager;
+const sessionData = await session.getData();
 
-const sessionData = session.getData();
-
-session.save(sessionData);
+await session.save(sessionData);
 ---
 
 <MainLayout>
   {
-    !sessionData.userId ? (
+    !sessionData?.userId ? (
       <div class="pt-20 flex flex-col items-center">
         <h1 class="text-2xl font-bold text-lime-500">Welcome Guest</h1>
         <p class="text-gray-500 ml-2">
@@ -25,7 +25,7 @@ session.save(sessionData);
       <div class="container mx-auto px-4">
         <div class="pt-20 flex flex-col items-center">
           <h1 class="text-2xl font-bold text-lime-500">
-            Welcome {sessionData.userId}
+            Welcome {sessionData?.userId}
           </h1>
           <p class="text-gray-500 ml-2">
             This is a protected page. You can only see this if you are logged
@@ -79,7 +79,7 @@ session.save(sessionData);
             In the project folder we have a folder called <code>functions</code>
             <br />
             In there we have a file called <code>session.js</code> which
-            contains the SessionManager class. All the session logic is in
+            contains the SessionStrapiManager class. All the session logic is in
             there. <br />
             <br />
             <code>getID</code> - returns the session ID for the current cookie{" "}

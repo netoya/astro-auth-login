@@ -1,13 +1,13 @@
 
-import { SessionManager } from "@functions/session";
+import { SessionStrapiManager } from "@functions/session-strapi";
 
 export class AuthController {
     private Astro: any;
-    private session: SessionManager;
+    private session: SessionStrapiManager;
 
     constructor(Astro){
         this.Astro = Astro;
-        this.session = new SessionManager(Astro);
+        this.session = Astro.locals.session;
     }
 
     async login(){
