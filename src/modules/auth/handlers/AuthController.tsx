@@ -21,11 +21,26 @@ export class AuthController {
         const identifier = data.get("identifier");
         const password = data.get("password");
         
+        try {
+         
+        const resp = await fetch(`http://localhost:1337/api/auth/local`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    identifier,
+                    password
+                    })
+                })
+        
+        const user= await resp.json();
+        console.log({user})
+        sessionData.user = user;
 
-        if (identifier === "admin" && password === "admin") {
-            sessionData.userId = "admin";
-        } else {
-            sessionData.userId = null;
+        } catch (error) {
+            console.log(error);
         }
 
         this.session.save(sessionData);
@@ -34,15 +49,15 @@ export class AuthController {
     }
     
 
-    getUserId(){
+    getUser(){
         const sessionData = this.session.getData();
-        return sessionData.userId;
+        return sessionData.user;
     }
 
 
     async logout(){
         const sessionData = this.session.getData();
-        sessionData.userId = null;
+        sessionData.user = null;
 
         this.session.save(sessionData);
     }

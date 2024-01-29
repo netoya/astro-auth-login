@@ -11,7 +11,7 @@ await session.save(sessionData);
 
 <MainLayout>
   {
-    !sessionData?.userId ? (
+    !sessionData?.user ? (
       <div class="pt-20 flex flex-col items-center">
         <h1 class="text-2xl font-bold text-lime-500">Welcome Guest</h1>
         <p class="text-gray-500 ml-2">
@@ -25,7 +25,7 @@ await session.save(sessionData);
       <div class="container mx-auto px-4">
         <div class="pt-20 flex flex-col items-center">
           <h1 class="text-2xl font-bold text-lime-500">
-            Welcome {sessionData?.userId}
+            Welcome {sessionData?.user.username}
           </h1>
           <p class="text-gray-500 ml-2">
             This is a protected page. You can only see this if you are logged
