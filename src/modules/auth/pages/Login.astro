@@ -2,10 +2,10 @@
 import MainLayout from "@common/layouts/MainLayout.astro";
 import { AuthController } from "@auth/handlers/AuthController";
 import LoginCard from "@auth/components/LoginCard.astro";
-const auth = new AuthController(Astro);
 
-// Controller
-const data = await auth.login();
+const session = Astro.locals.session;
+
+const data = await session.getData();
 ---
 
 <MainLayout>

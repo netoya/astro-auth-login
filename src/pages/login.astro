@@ -1,5 +1,17 @@
 ---
-import Login from "@auth/pages/Login.astro"
+import Login from "@auth/pages/Login.astro";
+import { AuthController } from "@modules/auth/handlers/AuthController";
+
+const auth = new AuthController(Astro);
+
+// Controller
+const data = await auth.login();
+if (data.user?.jwt) {
+  console.log("User is already logged in, redirecting to home page");
+  // redirect temporal header
+  Astro.response.status = 302;
+  Astro.response.headers.set("Location", "/");
+}
 ---
 
-<Login />
+{data.user?.jwt ? <p>Redirecting...</p> : <Login />}
