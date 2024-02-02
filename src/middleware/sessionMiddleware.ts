@@ -8,5 +8,7 @@ export async function sessionMiddleware(Astro, next) {
   // set cookie
   Astro.cookies.set("astro-session", sessionID);
   Astro.locals.session = sm;
+  const data = await sm.getData();
+  console.log({ data });
   return next();
 }
