@@ -1,5 +1,11 @@
 ---
-import Logout from "@modules/auth/pages/Logout.astro";
----
+import { AuthController } from "@modules/auth/handlers/AuthController";
 
-<Logout />
+const auth = new AuthController(Astro);
+await auth.logout();
+
+console.log("User logged out");
+// redirect temporal header
+Astro.response.status = 302;
+Astro.response.headers.set("Location", "/");
+---
