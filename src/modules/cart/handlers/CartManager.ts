@@ -29,7 +29,9 @@ export const CartManager = {
     ).then((res) => res.json());
 
     cart = resp.data;
-
+    if (!cart) {
+      return null;
+    }
     /**
      * TODO:
      * - si se elimina el carrito desde strapi

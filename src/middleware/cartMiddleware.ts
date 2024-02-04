@@ -1,10 +1,17 @@
 import { CartManager } from "@modules/cart/handlers/CartManager";
 
 export async function cartMiddleware(Astro, next) {
-  const cart = await CartManager.getCart(Astro);
+  let cart = await CartManager.getCart(Astro);
   const user = Astro.locals.user;
+  const session = Astro.locals.session;
+  if (!cart) {
+    session.save({ cartId: null });
 
-  if (user) {
+    cart = await CartManager.getCart(Astro);
+    return next();
+  }
+
+  if (user && cart) {
     const cartData = await cart.getCartData();
 
     if (!cartData.user) {
