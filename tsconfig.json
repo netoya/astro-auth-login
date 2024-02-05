@@ -13,7 +13,7 @@
       "@modules/*": ["src/modules/*"],
       "@common/*": ["src/modules/common/*"],
       "@auth/*": ["src/modules/auth/*"],
-      "@home/*": ["src/modules/home/*"],
+      "@home/*": ["src/modules/home/*"]
     }
   },  
 }

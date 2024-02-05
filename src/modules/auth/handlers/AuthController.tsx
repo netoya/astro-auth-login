@@ -26,7 +26,7 @@ export class AuthController {
         const password = data.get("password");
 
         try {
-            const resp = await fetch(`http://localhost:1337/api/auth/local`, {
+            const resp = await fetch(`${import.meta.env.API_URL}/auth/local`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

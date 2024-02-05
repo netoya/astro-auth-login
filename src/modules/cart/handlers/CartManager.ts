@@ -25,7 +25,7 @@ export const CartManager = {
     }
 
     const resp = await fetch(
-      `http://localhost:1337/api/carts/${cartId}?populate=*`
+      `${import.meta.env.API_URL}/carts/${cartId}?populate=*`
     ).then((res) => res.json());
 
     cart = resp.data;
@@ -59,7 +59,7 @@ export class CartEntity {
 
   async reloadCart() {
     const resp = await fetch(
-      `http://localhost:1337/api/carts/${this.cart.id}?populate=*`,
+      `${import.meta.env.API_URL}/carts/${this.cart.id}?populate=*`,
       {
         method: "GET",
         headers: {
@@ -72,7 +72,7 @@ export class CartEntity {
   }
 
   async setUser({ UserId }) {
-    await fetch(`http://localhost:1337/api/carts/${this.cart.id}`, {
+    await fetch(`${import.meta.env.API_URL}/carts/${this.cart.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +89,9 @@ export class CartEntity {
 
   async reloadProducts() {
     const resp = await fetch(
-      `http://localhost:1337/api/cart-products/?cart=${this.cart.id}&populate=product`,
+      `${import.meta.env.API_URL}/cart-products/?cart=${
+        this.cart.id
+      }&populate=product`,
       {
         method: "GET",
         headers: {
@@ -109,7 +111,7 @@ export class CartEntity {
   }
 
   async addProduct({ productID, quantity }) {
-    const resp = await fetch(`http://localhost:1337/api/cart-products`, {
+    const resp = await fetch(`${import.meta.env.API_URL}/cart-products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +131,7 @@ export class CartEntity {
   }
 
   async removeProduct({ cardProductId }) {
-    await fetch(`http://localhost:1337/api/cart-products/${cardProductId}`, {
+    await fetch(`${import.meta.env.API_URL}/cart-products/${cardProductId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -145,7 +147,7 @@ export class CartEntity {
   }
 
   async updateProduct({ cardProductId, quantity }) {
-    await fetch(`http://localhost:1337/api/cart-products/${cardProductId}`, {
+    await fetch(`${import.meta.env.API_URL}/cart-products/${cardProductId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
